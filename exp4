@@ -1,0 +1,50 @@
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+void main() {
+ runApp(MyApp());
+}
+class MyApp extends StatelessWidget {
+ @override
+ Widget build(BuildContext context) {
+ return MaterialApp(home: LoginPage(), debugShowCheckedModeBanner: false);
+ }
+}
+class LoginPage extends StatelessWidget {
+ final TextEditingController userCtrl = TextEditingController();
+ final TextEditingController passCtrl = TextEditingController();
+ void login() {
+ String user = userCtrl.text;
+ String pass = passCtrl.text;
+ if (user.isEmpty || pass.isEmpty) {
+ Fluttertoast.showToast(msg: "Please fill all fields");
+ } else if (user == "yuva" && pass == "shree") {
+ Fluttertoast.showToast(msg: "Login successful");
+ } else {
+ Fluttertoast.showToast(msg: "Invalid username or password");
+ }
+ }
+ @override
+ Widget build(BuildContext context) {
+ return Scaffold(
+ appBar: AppBar(title: Text("Login")),
+ body: Padding(
+ padding: EdgeInsets.all(20),
+ child: Column(
+ children: [
+ TextField(
+ controller: userCtrl,
+ decoration: InputDecoration(labelText: "Username"),
+ ),
+ TextField(
+ controller: passCtrl,
+ decoration: InputDecoration(labelText: "Password"),
+ obscureText: true,
+ ),
+ SizedBox(height: 20),
+ ElevatedButton(onPressed: login, child: Text("Login")),
+ ],
+ ),
+ ),
+ );
+ }
+} 
